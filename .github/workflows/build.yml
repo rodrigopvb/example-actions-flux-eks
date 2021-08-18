@@ -58,7 +58,7 @@ jobs:
           --tag ${{ env.RELEASE_IMAGE }} \                           
           --target release \                                 
           --push \                                           
-          .app                                                          
+          .                                                          
     
     - name: Deploy to Kubernetes cluster                                                                            
       uses: kodermax/kubectl-aws-eks@master                                                                         
