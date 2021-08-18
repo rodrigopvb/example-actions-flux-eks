@@ -22,6 +22,7 @@ env:
   KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
   KUBE_NAMESPACE: Deployment
   ECR_REPOSITORY: example-eks
+  TEST: example-eks-test  
   RELEASE_REVISION: "pr-${{ github.event.pull_request.number }}-${{ github.event.pull_request.head.sha }}"  
   
 jobs:                                            
@@ -72,7 +73,7 @@ jobs:
       env:                                                                                                          
         RELEASE_IMAGE: ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ env.RELEASE_REVISION }}
       with:                                                                                                         
-        args: set image deployment/my-pod app=${{ env.RELEASE_IMAGE }} --record -n $KUBE_NAMESPACE
+        args: set image deployment ${{ env.TEST }} app=${{ env.RELEASE_IMAGE }} --record -n $KUBE_NAMESPACE
     
     - name: Verify Kubernetes deployment                               
       uses: kodermax/kubectl-aws-eks@master                            
