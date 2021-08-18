@@ -58,10 +58,7 @@ jobs:
           --tag ${{ env.RELEASE_IMAGE }} \                           
           --target release \                                 
           --push \                                           
-          ./app                                                  
-
-        rm -rf /tmp/.buildx-cache
-        mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+          ./app                                                          
     
     - name: Deploy to Kubernetes cluster                                                                            
       uses: kodermax/kubectl-aws-eks@master                                                                         
