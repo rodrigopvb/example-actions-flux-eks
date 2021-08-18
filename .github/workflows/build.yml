@@ -2,7 +2,7 @@ name: Build, Push to ECR and Release to EKS
 
 on:
   pull_request:
-    branches: [main]
+    branches: [master]
     
 
 # https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html
