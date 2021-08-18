@@ -55,8 +55,8 @@ jobs:
         RELEASE_IMAGE: ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ env.RELEASE_REVISION }}
       run: |
         docker buildx create --use
-
-        docker build \                                
+        cd app
+        docker buildx build \                                
           --cache-from=type=local,src=/tmp/.buildx-cache \   
           --cache-to=type=local,dest=/tmp/.buildx-cache-new \
           --tag ${{ env.RELEASE_IMAGE }} \                           
