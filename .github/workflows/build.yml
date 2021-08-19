@@ -66,9 +66,9 @@ jobs:
       env:                                                                                                          
         RELEASE_IMAGE: ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ env.RELEASE_REVISION }}
       with:                                                                                                         
-        args: set image deployment ${{ env.TEST }} ${{ env.TEST }}=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$CONTAINER_IMAGE --record -n $KUBE_NAMESPACE
+        args: set image deployment ${{ env.TEST }} ${{ env.TEST }}=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$CONTAINER_IMAGE
     
-    - name: Verify Kubernetes deployment                               
-      uses: kodermax/kubectl-aws-eks@master                            
-      with:                                                            
-        args: rollout status deploy my-pod -n $KUBE_NAMESPACE    
+    # - name: Verify Kubernetes deployment                               
+    #   uses: kodermax/kubectl-aws-eks@master                            
+    #   with:                                                            
+    #     args: rollout status deploy my-pod -n $KUBE_NAMESPACE    
