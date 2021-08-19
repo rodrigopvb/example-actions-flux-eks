@@ -1,17 +1,15 @@
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: aws-example-octodex
   annotations:
     fluxcd.io/automated: "true"
 spec:
-  replicas: 1
-  strategy:
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 1
-  minReadySeconds: 5
+  selector:
+    matchLabels:
+      app: aws-example-octodex
+  replicas: 1 
   template:
     metadata:
       labels:
@@ -20,7 +18,7 @@ spec:
       containers:
       - name: aws-example-octodex
         # image: 00000000000000.dkr.ecr.my-region.amazonaws.com/example-eks:tag
-        image: REGISTRY/IMAGE:TAG
+        image: 191896455525.dkr.ecr.ap-southeast-2.amazonaws.com/example-eks:43e4c9d7c4aa2af31232def4dbb14b176d7cb226
         ports:
         - containerPort: 5000
         resources:
@@ -28,3 +26,15 @@ spec:
             cpu: 250m
           limits:
             cpu: 500m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: aws-example-octodex
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 5000
+  selector:
+    app: aws-example-octodex
