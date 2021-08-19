@@ -66,7 +66,7 @@ jobs:
       env:
         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}        
       with:
-        args: set image deployment ${{ env.TEST }} ${{ env.TEST }}=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$CONTAINER_IMAGE
+        args: set image deployment aws-example-octodex aws-example-octodex=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$CONTAINER_IMAGE
         
     - name: verify deployment
       uses: kodermax/kubectl-aws-eks@master
